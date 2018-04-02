@@ -32,6 +32,8 @@ namespace Quản_lý_kho_hàng
             if(accountBUS.CheckLogin(new Account(tbUser.Text, tbPass.Text)))
             {
                 MessageBox.Show("Login successful", "Login", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                PL.FormProduct formProduct = new PL.FormProduct();
+                formProduct.Show();
             }
             else
             {

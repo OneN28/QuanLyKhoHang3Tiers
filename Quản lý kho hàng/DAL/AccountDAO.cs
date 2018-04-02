@@ -23,6 +23,7 @@ namespace Quản_lý_kho_hàng.DAL
             {
                 accounts.Add(new Account(reader.GetString(0), reader.GetString(1)));
             }
+            reader.Close();
             return accounts;
         }
 

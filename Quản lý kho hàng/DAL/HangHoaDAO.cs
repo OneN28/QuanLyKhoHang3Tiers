@@ -19,8 +19,9 @@ namespace Quản_lý_kho_hàng.DAL
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                products.Add(new HangHoa(reader.GetString(0), reader.GetString(1),reader.GetString(2),reader.GetDouble(3),reader.GetInt16(4)));
+                products.Add(new HangHoa(reader.GetString(0), reader.GetString(1),reader.GetString(3),double.Parse(reader.GetString(2)),int.Parse(reader.GetString(4))));
             }
+            reader.Close();
             return products;
         }
         public bool Delete(string maHang)
@@ -30,20 +31,28 @@ namespace Quản_lý_kho_hàng.DAL
         }
         public bool Insert(HangHoa hangHoa)
         {
-            SqlCommand command = new SqlCommand(string.Format("INSERT INTO Hanghoa VALUES(\'{0}\',\'{1}\',\'{2}\',\'{3}\',\'{4}\')",
-                hangHoa.MaHang, hangHoa.TenHang, hangHoa.NoiChua, hangHoa.GiaHang, hangHoa.SoLuongHang));
+            SqlCommand command = new SqlCommand(string.Format("INSERT INTO Hanghoa VALUES(\'{0}\',\'{1}\',\'{4}\',\'{2}\',\'{3}\')",
+                hangHoa.MaHang, hangHoa.TenHang, hangHoa.NoiChua, hangHoa.GiaHang, hangHoa.SoLuongHang),ConfigureManager.SqlConnection);
             return command.ExecuteNonQuery() == 0 ? false : true;
         }
         public bool Update(string maHangOld, HangHoa hangHoa)
         {
-            SqlCommand command = new SqlCommand(
-                string.Format(
-                   "UPDATE Hanghoa SET Mahang='{0}', Tenhang='{1}', Noichua='{2}', Giahang='{3}', Soluonghang='{4}' WHERE Mahang = '{5}'",
-                  hangHoa.MaHang, hangHoa.TenHang, hangHoa.NoiChua, hangHoa.GiaHang, hangHoa.SoLuongHang, maHangOld
-                   ), ConfigureManager.SqlConnection
-                );
-
-            return command.ExecuteNonQuery() == 0 ? false : true;
+            try
+            {
+                SqlCommand command = new SqlCommand(
+                    string.Format(
+                       "UPDATE Hanghoa SET MaHang='{0}', TenHang='{1}', NoiChua='{2}', GiaHang='{3}', SoLuongHang='{4}' WHERE MaHang = '{5}'",
+                      hangHoa.MaHang, hangHoa.TenHang, hangHoa.NoiChua, hangHoa.GiaHang, hangHoa.SoLuongHang, maHangOld
+                       ), ConfigureManager.SqlConnection
+                    );
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch(Exception e)
+            {
+                
+                return false;
+            }
         }
     }
 }

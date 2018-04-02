@@ -43,7 +43,6 @@
             this.tbMaHang = new System.Windows.Forms.TextBox();
             this.btUpdate = new System.Windows.Forms.Button();
             this.btAdd = new System.Windows.Forms.Button();
-            this.btSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -59,6 +58,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(800, 254);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // splitContainer1
@@ -71,7 +71,6 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.splitContainer1.Panel1.Controls.Add(this.btSearch);
             this.splitContainer1.Panel1.Controls.Add(this.tbSLHang);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.tbGiaHang);
@@ -166,6 +165,7 @@
             this.btDelete.TabIndex = 4;
             this.btDelete.Text = "Delete";
             this.btDelete.UseVisualStyleBackColor = false;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
             // 
             // label1
             // 
@@ -192,6 +192,7 @@
             this.btUpdate.TabIndex = 1;
             this.btUpdate.Text = "Update";
             this.btUpdate.UseVisualStyleBackColor = false;
+            this.btUpdate.Click += new System.EventHandler(this.btUpdate_Click);
             // 
             // btAdd
             // 
@@ -204,16 +205,7 @@
             this.btAdd.TabIndex = 0;
             this.btAdd.Text = "Add";
             this.btAdd.UseVisualStyleBackColor = false;
-            // 
-            // btSearch
-            // 
-            this.btSearch.Location = new System.Drawing.Point(550, 115);
-            this.btSearch.Name = "btSearch";
-            this.btSearch.Size = new System.Drawing.Size(75, 23);
-            this.btSearch.TabIndex = 13;
-            this.btSearch.Text = "Search";
-            this.btSearch.UseVisualStyleBackColor = true;
-            this.btSearch.Click += new System.EventHandler(this.btSearch_Click);
+            this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
             // 
             // FormProduct
             // 
@@ -252,6 +244,5 @@
         private System.Windows.Forms.TextBox tbMaHang;
         private System.Windows.Forms.Button btUpdate;
         private System.Windows.Forms.Button btAdd;
-        private System.Windows.Forms.Button btSearch;
     }
 }
